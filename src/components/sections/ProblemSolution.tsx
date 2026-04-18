@@ -1,48 +1,27 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { AlertTriangle, Leaf } from "lucide-react";
 import { problem, solution } from "@/lib/mockData";
-
-const viewport = { once: true, amount: 0.3 };
 
 export function ProblemSolution() {
   return (
     <section id="problem" className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-7xl">
-        {/* section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.7 }}
-          className="mx-auto mb-16 max-w-2xl text-center"
-        >
+        <div className="reveal mx-auto mb-16 max-w-2xl text-center">
           <div className="mb-3 text-xs uppercase tracking-[0.3em] text-white/40">
             The tension, the answer
           </div>
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-white md:text-5xl">
-            Old paths. <span className="text-gradient-gold">New custodians.</span>
+            Old paths.{" "}
+            <span className="text-gradient-gold">New custodians.</span>
           </h2>
-        </motion.div>
+        </div>
 
-        {/* pain / cure grid */}
         <div className="relative grid gap-6 md:grid-cols-2 md:gap-10">
-          {/* connector line between cards on md+ */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-y-8 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent md:block"
           />
 
-          {/* Pain */}
-          <motion.article
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl md:p-10"
-          >
-            {/* ember wash */}
+          <article className="reveal group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 md:p-10">
             <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-ember/15 blur-3xl transition duration-700 group-hover:bg-ember/25" />
             <div className="relative">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-ember/30 bg-ember/10 px-3 py-1 text-[11px] uppercase tracking-widest text-ember">
@@ -67,16 +46,9 @@ export function ProblemSolution() {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
 
-          {/* Cure */}
-          <motion.article
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="group relative overflow-hidden rounded-3xl border border-gold/20 bg-white/[0.03] p-8 backdrop-blur-xl md:p-10"
-          >
+          <article className="reveal group relative overflow-hidden rounded-3xl border border-gold/20 bg-white/[0.03] p-8 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 md:p-10">
             <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-gold/15 blur-3xl transition duration-700 group-hover:bg-gold/25" />
             <div className="relative">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[11px] uppercase tracking-widest text-gold">
@@ -101,7 +73,7 @@ export function ProblemSolution() {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
         </div>
       </div>
     </section>

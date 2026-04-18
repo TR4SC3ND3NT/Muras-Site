@@ -118,6 +118,92 @@ export const steps: Step[] = [
   },
 ];
 
+export type MapSite = {
+  id: string;
+  name: string;
+  subtitle: string;
+  lore: string;
+  coords: { x: number; y: number }; // percentage coordinates within map container
+  era: string;
+  altitude?: string;
+};
+
+export const mapSites: MapSite[] = [
+  {
+    id: "cholpon-ata",
+    name: "Cholpon-Ata",
+    subtitle: "Father of the Morning Star",
+    lore: "Means 'Father of the Morning Star (Venus)'. Famous for Bronze Age solar symbols and Iron Age Saka Animal Style carvings.",
+    coords: { x: 62, y: 38 },
+    era: "Bronze Age · Iron Age",
+    altitude: "1,620 m",
+  },
+  {
+    id: "manjyly-ata",
+    name: "Manjyly-Ata",
+    subtitle: "Valley of labyrinths",
+    lore: "A sacred valley of labyrinths. Contains the Bugu-Ene (Mother Deer) springs, known since antiquity to heal illnesses.",
+    coords: { x: 42, y: 58 },
+    era: "Pre-Islamic · Tengri tradition",
+    altitude: "1,700 m",
+  },
+  {
+    id: "saimaluu-tash",
+    name: "Saimaluu-Tash",
+    subtitle: "Patterned stones",
+    lore: "Located at 3,000 meters. Over 30,000 petroglyphs buried under snow 11 months a year. A globally significant archive of nomadic history.",
+    coords: { x: 28, y: 78 },
+    era: "Neolithic → Medieval",
+    altitude: "3,000 m",
+  },
+];
+
+export const metrics = [
+  {
+    value: 30000,
+    suffix: "+",
+    label: "Petroglyphs Digitized",
+    hint: "Across Saimaluu-Tash, Cholpon-Ata, and 40 smaller archives.",
+  },
+  {
+    value: 150,
+    suffix: "+",
+    label: "Sacred Mazars Mapped",
+    hint: "Each annotated with taboos, seasonality, and access ritual.",
+  },
+  {
+    value: 0.5,
+    suffix: "s",
+    label: "Offline Load Time",
+    decimals: 1,
+    hint: "From cold start to first route render on mid-range devices.",
+  },
+] as const;
+
+export const community = {
+  main: {
+    name: "Muras Telegram Hub",
+    body: "Join 5,000+ modern nomads. Share routes, find companions, and get live trail updates.",
+    cta: "Join Channel",
+    handle: "t.me/muras_path",
+  },
+  sides: [
+    {
+      title: "Offline Guides & Etiquette",
+      body: "Learn the taboos and rules of visiting a sacred Mazar before you arrive.",
+      cta: "Read the rules",
+    },
+    {
+      title: "Crowdsource the Archive",
+      body: "Upload photos of damaged heritage to help the Ministry of Culture fight vandalism.",
+      cta: "Start contributing",
+    },
+  ],
+} as const;
+
+export const policyAlignment =
+  "Developed in alignment with the 2024-2028 Digital Transformation Concept of the Kyrgyz Republic.";
+
 export type CalendarEvent = { day: number; label: string };
 
 export const calendarWidget: {
