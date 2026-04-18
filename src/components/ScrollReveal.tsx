@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -13,13 +14,13 @@ type Props = {
 
 export function ScrollReveal({ children }: Props) {
   const scope = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useGSAP(
     () => {
       const targets = gsap.utils.toArray<HTMLElement>(".reveal");
       if (!targets.length) return;
 
-      // Seed the initial state so SSR content is consistent post-mount.
       gsap.set(targets, { y: 50, opacity: 0 });
 
       ScrollTrigger.batch(targets, {
@@ -33,13 +34,11 @@ export function ScrollReveal({ children }: Props) {
             stagger: 0.12,
             overwrite: "auto",
           }),
-        // once: elements don't re-hide when scrolling back up
       });
 
-      // Ensure positions recalc after images/fonts settle
       ScrollTrigger.refresh();
     },
-    { scope }
+    { scope, dependencies: [pathname] }
   );
 
   return <div ref={scope}>{children}</div>;

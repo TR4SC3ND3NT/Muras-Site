@@ -1,32 +1,39 @@
+import Link from "next/link";
 import { Apple, Play, Shield, Mail, Globe } from "lucide-react";
 import { app, policyAlignment } from "@/lib/mockData";
 
-const columns = [
+type FooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Product",
     links: [
-      { label: "Features", href: "#features" },
-      { label: "How it works", href: "#how" },
-      { label: "Live demo", href: "#demo" },
-      { label: "Changelog", href: "#" },
+      { label: "Features", href: "/features" },
+      { label: "How it works", href: "/how-it-works" },
+      { label: "Live demo", href: "/demo" },
+      { label: "Community", href: "/community" },
     ],
   },
   {
     title: "Heritage",
     links: [
-      { label: "Petroglyph archive", href: "#" },
-      { label: "Sacred mazars", href: "#" },
-      { label: "Ministry of Culture", href: "#" },
-      { label: "Press kit", href: "#" },
+      { label: "Petroglyph archive", href: "/demo" },
+      { label: "Sacred mazars", href: "/community" },
+      { label: "Ministry of Culture", href: "/community" },
+      { label: "Press kit", href: "/community" },
     ],
   },
   {
-    title: "Legal",
+    title: "Account",
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Use", href: "#" },
-      { label: "Data ethics", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Log in", href: "/login" },
+      { label: "Create account", href: "/register" },
+      { label: "Privacy Policy", href: "/community" },
+      { label: "Contact", href: "/community" },
     ],
   },
 ];
@@ -34,7 +41,6 @@ const columns = [
 export function Footer() {
   return (
     <footer className="relative mt-12 border-t border-white/10 bg-black/40 backdrop-blur-xl">
-      {/* top accent stripe */}
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-px opacity-80"
@@ -46,9 +52,8 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl px-6 py-16 md:px-12">
         <div className="grid gap-12 lg:grid-cols-5">
-          {/* brand + CTAs */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-ember to-gold text-neutral-950 shadow-[0_0_30px_-6px_rgba(255,69,0,0.6)]">
                 <span className="text-sm font-bold">M</span>
               </div>
@@ -60,7 +65,7 @@ export function Footer() {
                   {app.tagline.toUpperCase()}
                 </div>
               </div>
-            </div>
+            </Link>
 
             <p className="mt-5 max-w-xs text-sm text-white/55">
               Your digital compass to nomadic antiquity. Built for custodians,
@@ -70,8 +75,7 @@ export function Footer() {
             <div className="mt-6 flex flex-col gap-2 sm:flex-row">
               <a
                 href="#"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white text-xs font-medium text-neutral-950 transition hover:bg-white/90"
-                style={{ paddingInline: "1.125rem" }}
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-xs font-medium text-neutral-950 transition hover:bg-white/90"
               >
                 <Apple className="h-4 w-4" />
                 App Store
@@ -103,7 +107,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* link columns */}
           {columns.map((col) => (
             <div key={col.title}>
               <div className="mb-4 text-xs uppercase tracking-[0.25em] text-white/40">
@@ -112,9 +115,12 @@ export function Footer() {
               <ul className="space-y-3 text-sm text-white/65">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="transition hover:text-white">
+                    <Link
+                      href={l.href}
+                      className="transition hover:text-white"
+                    >
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -122,7 +128,6 @@ export function Footer() {
           ))}
         </div>
 
-        {/* bottom row */}
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 md:flex-row md:items-center">
           <div>
             © {new Date().getFullYear()} {app.fullName} · Built for the steppe.
@@ -135,7 +140,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* policy alignment banner */}
       <div className="relative border-t border-white/10 bg-gradient-to-r from-ember/[0.08] via-white/[0.02] to-gold/[0.08]">
         <div
           aria-hidden

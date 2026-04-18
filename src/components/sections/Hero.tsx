@@ -1,18 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Apple, Play, ChevronRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlowOrb } from "@/components/primitives/GlowOrb";
 import { PhoneMockup } from "@/components/primitives/PhoneMockup";
-import { narrative, season, app } from "@/lib/mockData";
+import { narrative, season } from "@/lib/mockData";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.15 + i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: {
+      delay: 0.15 + i * 0.12,
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   }),
 };
 
@@ -20,7 +25,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate min-h-[100svh] overflow-hidden"
+      className="relative isolate min-h-[calc(100svh-5rem)] overflow-hidden"
     >
       {/* ambient orbs */}
       <GlowOrb
@@ -49,58 +54,8 @@ export function Hero() {
         }}
       />
 
-      {/* nav */}
-      <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12 md:py-8">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex items-center gap-2"
-        >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-ember to-gold text-neutral-950 shadow-[0_0_24px_-4px_rgba(255,69,0,0.6)]">
-            <span className="text-sm font-bold">M</span>
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm font-semibold tracking-widest text-white">
-              {app.name.toUpperCase()}
-            </span>
-            <span className="text-[10px] tracking-[0.25em] text-white/40">
-              {app.tagline.toUpperCase()}
-            </span>
-          </div>
-        </motion.div>
-
-        <motion.nav
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="hidden items-center gap-8 text-sm text-white/70 md:flex"
-        >
-          <a href="#problem" className="transition hover:text-white">
-            Problem
-          </a>
-          <a href="#features" className="transition hover:text-white">
-            Features
-          </a>
-          <a href="#how" className="transition hover:text-white">
-            How it works
-          </a>
-        </motion.nav>
-
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <Button variant="ghost" size="sm" className="hidden md:inline-flex">
-            Sign in
-            <ChevronRight />
-          </Button>
-        </motion.div>
-      </header>
-
       {/* main grid */}
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pb-24 pt-8 md:px-12 md:pb-32 md:pt-12 lg:grid-cols-2 lg:gap-20">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pb-24 pt-12 md:px-12 md:pb-32 md:pt-20 lg:grid-cols-2 lg:gap-20">
         {/* copy column */}
         <div className="relative">
           <motion.div
@@ -168,15 +123,19 @@ export function Hero() {
             animate="show"
             className="mt-8 flex flex-col gap-3 sm:flex-row"
           >
-            <Button size="lg" className="group">
-              <Apple className="h-4 w-4" />
-              Download App
-              <span className="opacity-60">· iOS / Android</span>
-              <Play className="h-3 w-3 opacity-60" />
+            <Button size="lg" className="group" asChild>
+              <Link href="/register">
+                <Apple className="h-4 w-4" />
+                Download App
+                <span className="opacity-60">· iOS / Android</span>
+                <Play className="h-3 w-3 opacity-60" />
+              </Link>
             </Button>
-            <Button size="lg" variant="ghost" className="group">
-              Try Web Demo
-              <ChevronRight className="transition-transform group-hover:translate-x-0.5" />
+            <Button size="lg" variant="ghost" className="group" asChild>
+              <Link href="/demo">
+                Try Web Demo
+                <ChevronRight className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </Button>
           </motion.div>
 

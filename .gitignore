@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# database (local sqlite)
+/muras.db
+/muras.db-journal
+/muras.db-shm
+/muras.db-wal

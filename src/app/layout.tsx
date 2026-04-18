@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/ui/Navbar";
+import { ChromeFooter } from "@/components/ChromeFooter";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,7 +52,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <body className="min-h-full bg-neutral-950 text-white selection:bg-ember/40">
-        {children}
+        <Navbar />
+        <ScrollReveal>{children}</ScrollReveal>
+        <ChromeFooter />
       </body>
     </html>
   );
