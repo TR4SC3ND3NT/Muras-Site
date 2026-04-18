@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ember: #ff4500;
+  --color-ember-soft: #ff6a33;
+  --color-gold: #ffd700;
+  --color-gold-soft: #ffe766;
+  --color-obsidian: #0a0a0a;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-float-slow: float-slow 14s ease-in-out infinite;
+  --animate-float-fast: float-fast 9s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+
+  @keyframes float-slow {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(20px, -30px, 0) scale(1.05); }
+  }
+  @keyframes float-fast {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-20px, 20px, 0) scale(0.95); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  background: var(--color-obsidian);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Radial ethno noise texture overlay for the dark canvas */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(255, 69, 0, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 100% 110%, rgba(255, 215, 0, 0.06), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 3px);
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+}
+
+@utility glass {
+  @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+}
+
+@utility glass-strong {
+  @apply border border-white/15 bg-white/[0.06] backdrop-blur-2xl;
+}
+
+@utility text-gradient-ember {
+  background: linear-gradient(135deg, #ff4500 0%, #ff8a4c 50%, #ffd700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@utility text-gradient-gold {
+  background: linear-gradient(135deg, #ffd700 0%, #fff3a0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+::selection {
+  background: rgba(255, 69, 0, 0.35);
+  color: #fff;
+}
+
+/* Custom scrollbar tuned to the palette */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255,69,0,0.4), rgba(255,215,0,0.3));
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(255,69,0,0.7), rgba(255,215,0,0.5));
 }
